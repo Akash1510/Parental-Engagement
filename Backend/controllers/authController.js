@@ -3,46 +3,6 @@ const generateOTP = require("../utils/generateOTP");
 const sendOTP = require("../utils/sendOTP");
 const jwt = require("jsonwebtoken");
 
-// // Send OTP using Twilio
-// exports.sendOTP = async (req, res) => {
-//   const { name, mobile, role } = req.body;
-
-//   try {
-//     if (!/^\d{10}$/.test(mobile)) {
-//       return res.status(400).json({ success: false, message: "Invalid mobile number. Must be 10 digits." });
-//     }
-
-//     const formattedMobile = `+91${mobile}`; // Ensure E.164 format
-
-//     let user = await User.findOne({ mobile });
-
-//     if (!user) {
-//       if (!role || !["parent", "teacher"].includes(role)) {
-//         return res.status(400).json({ success: false, message: "Invalid role. Must be 'parent' or 'teacher'." });
-//       }
-//       user = await User.create({ name, mobile, role });
-//     }
-
-//     // Generate OTP
-//     const otp = generateOTP();
-//     user.otp = otp;
-//     user.isVerified = false; // Reset verification status
-//     await user.save();
-
-//     // Send OTP via Twilio
-//     await sendOTP(formattedMobile, otp);
-
-//     res.status(200).json({ success: true, message: "OTP sent successfully" });
-//   } catch (error) {
-//     console.error("Error sending OTP:", error.message);
-//     res.status(500).json({ success: false, error: error.message });
-//   }
-// };
-
-
-
-
-
 
 exports.sendOTP = async (req, res) => {
   const { name, mobile, role } = req.body;
