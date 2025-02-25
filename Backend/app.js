@@ -16,7 +16,7 @@ connectDB();
 // Middleware
 app.use(express.json()); // Parse JSON request body
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded data
-app.use(cors({ origin: process.env.CLIENT_URL })); // Secure CORS policy
+app.use(cors({credentials: true , origin: process.env.CLIENT_URL })); // Secure CORS policy
 app.use(helmet()); // Security headers
 app.use(morgan("combined")); // Logging
 app.use(cookieParser()); // Cookie parsing

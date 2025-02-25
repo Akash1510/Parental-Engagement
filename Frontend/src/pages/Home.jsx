@@ -62,8 +62,8 @@ const Home = () => {
           <option>Spanish</option>
           <option>French</option>
         </select>
-        <Link to="/login" className="block md:inline-block px-6 py-3 md:py-0 hover:bg-[#008A8E] md:hover:bg-transparent">Login</Link>
-        <Link to="/signup" className="block md:inline-block px-6 py-3 md:py-0 hover:bg-[#008A8E] md:hover:bg-transparent">Sign Up</Link>
+        {/* <Link to="/login" className="block md:inline-block px-6 py-3 md:py-0 hover:bg-[#008A8E] md:hover:bg-transparent">Login</Link> */}
+        <Link to="/signin" className="block md:inline-block px-6 py-3 md:py-0 hover:bg-[#008A8E] md:hover:bg-transparent">SignIn</Link>
       </div>
     </motion.nav>
 
@@ -245,7 +245,7 @@ const Home = () => {
       ❌
     </button>
 
-    <h2 className="text-xl font-bold text-center text-[#00B6BA] mb-2">EduConnect AI Bot</h2>
+    <h2 className="text-xl font-bold text-center text-[#00B6BA] mb-2">EduMitra AI Bot</h2>
     
     {/* Chat Messages */}
     <div className="h-48 overflow-y-auto border p-2 rounded-lg bg-gray-50 flex flex-col space-y-2 pb-12">

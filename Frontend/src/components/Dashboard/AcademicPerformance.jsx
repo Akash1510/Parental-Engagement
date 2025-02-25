@@ -1,4 +1,4 @@
-import React from "react";
+
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell } from "recharts";
 import { jsPDF } from "jspdf";
 

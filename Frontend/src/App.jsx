@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Login from "./pages/Login";
+// import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import AiBot from "./pages/AiBot";
@@ -22,15 +22,15 @@ import RemindersAndAlert from "./components/Teacher/RemindersAndAlert";
 import MeetingSchedulers from "./components/Teacher/MeetingSchedulers";
 import ManageAssignments from "./components/Teacher/ManageAssignments";
 import TeacherSchedule from "./components/Teacher/TeacherSchedule";
-
+import  Students  from "./components/Teacher/Students";
 function App() {
   return (
     <Router>
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        {/* <Route path="/login" element={<Login />} /> */}
+        <Route path="/signin" element={<Signup />} />
         <Route path="/aibot" element={<AiBot />} />
         {/* Teacher Dashboard Routes */}
         <Route path="/teacher" element={<TeacherDashboard />}>
@@ -41,6 +41,7 @@ function App() {
           <Route path="notice" element={<ImportantNotice />} />
           <Route path="alert" element={<RemindersAndAlert />} />
           <Route path="meeting" element={<MeetingSchedulers />} />
+          <Route path="students" element={<Students/>}/>
         </Route>
 
         {/* Parent Dashboard Routes */}

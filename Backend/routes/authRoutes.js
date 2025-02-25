@@ -1,5 +1,5 @@
 const express = require("express");
-const { sendOTP, verifyOTP } = require("../controllers/authController");
+const { sendOTP, verifyOTP, logout } = require("../controllers/authController");
 
 const router = express.Router();
 
@@ -10,5 +10,5 @@ router.post("/send-otp", sendOTP);
 // @route   POST /api/auth/verify-otp
 // @desc    Verify OTP and authenticate user
 router.post("/verify-otp", verifyOTP);
-
+router.post("/logout",logout)
 module.exports = router;

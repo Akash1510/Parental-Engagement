@@ -3,6 +3,8 @@ import { FaMobileAlt, FaLock, FaUser, FaUserGraduate, FaUserTie } from "react-ic
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import axios from "../utils/api"
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -14,6 +16,8 @@ const SignUp = () => {
   const [isVerified, setIsVerified] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   // ✅ Handle Mobile Input Change
   const handleMobileChange = (e) => {
@@ -28,7 +32,7 @@ const SignUp = () => {
     setError("");
 
     try {
-      const response = await axios.post("/auth/send-otp", { mobile });
+      const response = await axios.post("/auth/send-otp", {mobile});
       if (response.data.success) {
         setIsOtpSent(true);
       } else {
@@ -42,24 +46,64 @@ const SignUp = () => {
   };
 
   // ✅ Verify OTP and Signup
+  // const handleVerifyOtp = async () => {
+  //   setLoading(true);
+  //   setError("");
+
+  //   try {
+  //     const response = await axios.post("/auth/verify-otp", { mobile, otp, name, role: userType });
+  //     if (response.data.success) {
+  //       alert("Signup Successful!");
+  //       Cookies.set("authToken", response.data.token, { expires: 7, secure: true });
+  //       console.log("Token Set:", response.data.token);
+
+  //       // ✅ Navigate to the respective dashboard based on user role
+  //       if (response.data.user.role === "teacher") {
+  //         // setIsVerified(true)
+  //         navigate("/teacher");
+  //       } else if (response.data.user.role === "parent") {
+  //         navigate("/dashboard");
+  //       }
+  //     } else {
+  //       setError(response.data.error || "Invalid OTP.");
+  //     }
+  //   } catch (err) {
+  //     setError("Error verifying OTP.");
+  //   }
+
+  //   setLoading(false);
+  // };
   const handleVerifyOtp = async () => {
     setLoading(true);
     setError("");
 
     try {
-      const response = await axios.post("/auth/verify-otp", { mobile, otp, name, role: userType });
-      if (response.data.success) {
-        setIsVerified(true);
-        alert("Signup Successful!");
-      } else {
-        setError(response.data.error || "Invalid OTP.");
-      }
+        const response = await axios.post("/auth/verify-otp", { mobile, otp, name, role: userType });
+        
+        console.log("Response Data:", response.data); // ✅ Debugging
+
+        if (response.data.success) {
+            alert("Signup Successful!");
+            Cookies.set("authToken", response.data.token, { expires: 7, secure: true });
+
+            // ✅ Ensure correct role-based redirection
+            if (response.data.user?.role === "teacher") {
+                navigate("/teacher");
+            } else if (response.data.user?.role === "parent") {
+                navigate("/dashboard");
+            } else {
+                setError("Unknown user role. Contact support.");
+            }
+        } else {
+            setError(response.data.error || "Invalid OTP.");
+        }
     } catch (err) {
-      setError("Error verifying OTP.");
+        console.error("Error verifying OTP:", err);
+        setError("Error verifying OTP.");
     }
 
     setLoading(false);
-  };
+};
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-white text-gray-900 font-inter px-4 sm:px-6 lg:px-8">
@@ -152,7 +196,7 @@ const SignUp = () => {
         )}
 
         <p className="text-center text-gray-600 text-sm mt-4">
-          Already have an account? <Link to="/" className="text-blue-500 hover:underline">Login</Link>
+         To know More<Link to="/" className="text-blue-500 hover:underline">Back To Home</Link>
         </p>
       </motion.div>
     </div>
