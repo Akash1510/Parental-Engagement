@@ -53,7 +53,7 @@ const Home = () => {
       {/* Navigation Links */}
       <div className={`md:flex md:items-center md:gap-6 absolute md:static top-16 left-0 w-full md:w-auto bg-[#00B6BA] md:bg-transparent shadow-md md:shadow-none transition-all duration-300 ${isOpen ? "block" : "hidden"}`}>
       {/* <Link to="/TeacherDashboard" className="block md:inline-block px-6 py-3 md:py-0 hover:bg-[#008A8E] md:hover:bg-transparent">Teacher Dashboard</Link> */}
-        <Link to="/dashboard" className="block md:inline-block px-6 py-3 md:py-0 hover:bg-[#008A8E] md:hover:bg-transparent">Dashboard</Link>
+        {/* <Link to="/dashboard" className="block md:inline-block px-6 py-3 md:py-0 hover:bg-[#008A8E] md:hover:bg-transparent">Dashboard</Link> */}
         <select
           className="block md:inline-block bg-white text-gray-900 px-3 py-2 rounded-lg border border-gray-300 hover:border-[#00B6BA] mx-6 md:mx-0 my-2 md:my-0"
           onChange={(e) => setLanguage(e.target.value)}
