@@ -7,7 +7,7 @@ const {
     updateTeacherProfile, 
     scheduleMeeting 
 } = require("../controllers/teacherController");
-
+const { protect, checkRole } = require("../middleware/authmiddleware");
 
 const router = express.Router();
 
@@ -23,22 +23,22 @@ router.get("/:id", getTeacherById);
 
 // @route   POST /api/teachers/rate
 // @desc    Rate a teacher
-// @access  Private (Parent)
-router.post("/rate",rateTeacher);
+// @access  Private (Only Parents)
+router.post("/rate", protect, checkRole("parent"), rateTeacher);
 
 // @route   GET /api/teachers/profile
 // @desc    Get teacher profile
-// @access  Private (Teacher)
-// router.get("/profile", getTeacherProfile);
+// @access  Private (Only Teacher)
+router.get("/profile", protect, checkRole("teacher"), getTeacherProfile);
 
 // @route   PUT /api/teachers/profile
 // @desc    Update teacher profile
-// // @access  Private (Teacher)
-// router.put("/profile", updateTeacherProfile);
+// @access  Private (Only Teacher)
+router.put("/profile", protect, checkRole("teacher"), updateTeacherProfile);
 
-// // @route   POST /api/teachers/meeting
-// // @desc    Schedule a meeting with parents
-// // @access  Private (Teacher)
-// router.post("/meeting", scheduleMeeting);
+// @route   POST /api/teachers/meeting
+// @desc    Schedule a meeting with parents
+// @access  Private (Only Teacher)
+router.post("/meeting", protect, checkRole("teacher"), scheduleMeeting);
 
 module.exports = router;
